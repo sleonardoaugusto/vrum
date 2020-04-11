@@ -20,7 +20,7 @@ class MotorTest(unittest.TestCase):
         self.m = Motor()
 
     def test_acelerar(self):
-        """Velocidade deve incrementar ao passo de 1"""
+        """Acelerar deve incrementar velocidade ao passo de 1"""
         self.m.acelerar()
         self.assertEqual(self.m.velocidade, 1)
         self.m.acelerar()
@@ -32,8 +32,8 @@ class MotorTest(unittest.TestCase):
 
     def test_frear(self):
         """
-        Frear deve decrementar ao passo de 2
-        Atributo velocidade deve ter valor mínimo de 0
+        Frear deve decrementar velocidade ao passo de 2
+        Velocidade deve ter valor mínimo de 0
         """
         self.m.velocidade = 0
         self.m.frear()
