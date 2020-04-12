@@ -10,7 +10,6 @@ class Direcoes(enum.Enum):
 
 
 class Direcao:
-
     def __init__(self):
         self.direcao = Direcoes.Norte.name
 
