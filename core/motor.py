@@ -9,10 +9,8 @@ class Motor:
         self.velocidade += 1
 
     def frear(self):
-        if self.velocidade < 2:
-            self.velocidade = 0
-        else:
-            self.velocidade -= 2
+        self.velocidade -= 2
+        self.velocidade = max(0, self.velocidade)
 
 
 class MotorTest(unittest.TestCase):
