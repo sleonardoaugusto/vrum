@@ -23,7 +23,7 @@ class Direcao:
         self.direcao = Direcoes(value).name
 
 
-class TestDirecao(unittest.TestCase):
+class DirecaoTest(unittest.TestCase):
     def setUp(self) -> None:
         self.d = Direcao()
 
