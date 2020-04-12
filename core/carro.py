@@ -28,4 +28,5 @@ class CarroTest(unittest.TestCase):
         self.c = Carro(motor, direcao)
 
     def test_instance(self):
-        self.assertIsInstance(self.c.motor, Motor, Direcao)
+        self.assertIsInstance(self.c.motor, Motor)
+        self.assertIsInstance(self.c.direcao, Direcao)
