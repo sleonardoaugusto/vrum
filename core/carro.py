@@ -4,17 +4,28 @@ from core.motor import Motor
 
 
 class Carro:
-    def __init__(self):
-        self.velocidade = Motor().velocidade
-        self.direcao = Direcao().direcao
+    def __init__(self, motor, direcao):
+        self.motor = motor
+        self.direcao = direcao
+
+    def calcular_velocidade(self):
+        return self.motor.velocidade
+
+    def acelerar(self):
+        self.motor.acelerar()
+
+    def frear(self):
+        self.motor.frear()
+
+    def calcular_direcao(self):
+        return self.direcao.valor
 
 
 class CarroTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.c = Carro()
+        motor = Motor()
+        direcao = Direcao()
+        self.c = Carro(motor, direcao)
 
-    def test_velocidade(self):
-        self.assertEqual(self.c.velocidade, 0)
-
-    def test_direcao(self):
-        self.assertEqual(self.c.direcao, Direcoes.Norte.name)
+    def test_instance(self):
+        self.assertIsInstance(self.c.motor, Motor, Direcao)

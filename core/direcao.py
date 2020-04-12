@@ -11,15 +11,15 @@ class Direcoes(enum.Enum):
 
 class Direcao:
     def __init__(self):
-        self.direcao = Direcoes.Norte.name
+        self.valor = Direcoes.Norte.name
 
     def girar(self, direcao):
-        value = Direcoes[self.direcao].value
+        value = Direcoes[self.valor].value
         if direcao == 'direita':
             value = 1 if value == 4 else value + 1
         if direcao == 'esquerda':
             value = 4 if value == 1 else value - 1
-        self.direcao = Direcoes(value).name
+        self.valor = Direcoes(value).name
 
 
 class DirecaoTest(unittest.TestCase):
@@ -27,20 +27,20 @@ class DirecaoTest(unittest.TestCase):
         self.d = Direcao()
 
     def test_girar(self):
-        self.assertEqual(self.d.direcao, Direcoes.Norte.name)
+        self.assertEqual(self.d.valor, Direcoes.Norte.name)
         self.d.girar(direcao='direita')
-        self.assertEqual(self.d.direcao, Direcoes.Leste.name)
+        self.assertEqual(self.d.valor, Direcoes.Leste.name)
         self.d.girar(direcao='direita')
-        self.assertEqual(self.d.direcao, Direcoes.Sul.name)
+        self.assertEqual(self.d.valor, Direcoes.Sul.name)
         self.d.girar(direcao='direita')
-        self.assertEqual(self.d.direcao, Direcoes.Oeste.name)
+        self.assertEqual(self.d.valor, Direcoes.Oeste.name)
         self.d.girar(direcao='direita')
-        self.assertEqual(self.d.direcao, Direcoes.Norte.name)
+        self.assertEqual(self.d.valor, Direcoes.Norte.name)
         self.d.girar(direcao='esquerda')
-        self.assertEqual(self.d.direcao, Direcoes.Oeste.name)
+        self.assertEqual(self.d.valor, Direcoes.Oeste.name)
         self.d.girar(direcao='esquerda')
-        self.assertEqual(self.d.direcao, Direcoes.Sul.name)
+        self.assertEqual(self.d.valor, Direcoes.Sul.name)
         self.d.girar(direcao='esquerda')
-        self.assertEqual(self.d.direcao, Direcoes.Leste.name)
+        self.assertEqual(self.d.valor, Direcoes.Leste.name)
         self.d.girar(direcao='esquerda')
-        self.assertEqual(self.d.direcao, Direcoes.Norte.name)
+        self.assertEqual(self.d.valor, Direcoes.Norte.name)
