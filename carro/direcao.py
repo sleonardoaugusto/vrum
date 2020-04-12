@@ -1,58 +1,47 @@
 import unittest
+import enum
+
+
+class Direcoes(enum.Enum):
+    Norte = 1
+    Leste = 2
+    Sul = 3
+    Oeste = 4
 
 
 class Direcao:
-    NORTE = 'N'
-    LESTE = 'L'
-    SUL = 'S'
-    OESTE = 'O'
 
     def __init__(self):
-        self.direcao = self.NORTE
+        self._direcao = Direcoes.Norte.name
 
-    def girar_a_direita(self):
-        if self.direcao == self.NORTE:
-            self.direcao = self.LESTE
-        elif self.direcao == self.LESTE:
-            self.direcao = self.SUL
-        elif self.direcao == self.SUL:
-            self.direcao = self.OESTE
-        else:
-            self.direcao = self.NORTE
-
-    def girar_a_esquerda(self):
-        if self.direcao == self.OESTE:
-            self.direcao = self.SUL
-        elif self.direcao == self.SUL:
-            self.direcao = self.LESTE
-        elif self.direcao == self.LESTE:
-            self.direcao = self.NORTE
-        else:
-            self.direcao = self.OESTE
+    def girar(self, direcao):
+        value = Direcoes[self._direcao].value
+        if direcao == 'direita':
+            value = 1 if value == 4 else value + 1
+        if direcao == 'esquerda':
+            value = 4 if value == 1 else value - 1
+        self._direcao = Direcoes(value).name
 
 
 class TestDirecao(unittest.TestCase):
     def setUp(self) -> None:
         self.d = Direcao()
 
-    def test_girar_a_direita(self):
-        self.assertEqual(self.d.direcao, self.d.NORTE)
-        self.d.girar_a_direita()
-        self.assertEqual(self.d.direcao, self.d.LESTE)
-        self.d.girar_a_direita()
-        self.assertEqual(self.d.direcao, self.d.SUL)
-        self.d.girar_a_direita()
-        self.assertEqual(self.d.direcao, self.d.OESTE)
-        self.d.girar_a_direita()
-        self.assertEqual(self.d.direcao, self.d.NORTE)
-
-    def test_girar_a_esquerda(self):
-        self.assertEqual(self.d.direcao, self.d.NORTE)
-        self.d.girar_a_esquerda()
-        self.assertEqual(self.d.direcao, self.d.OESTE)
-        self.d.girar_a_esquerda()
-        self.assertEqual(self.d.direcao, self.d.SUL)
-        self.d.girar_a_esquerda()
-        self.assertEqual(self.d.direcao, self.d.LESTE)
-        self.d.girar_a_esquerda()
-        self.assertEqual(self.d.direcao, self.d.NORTE)
+    def test_girar(self):
+        self.assertEqual(self.d._direcao, Direcoes.Norte.name)
+        self.d.girar(direcao='direita')
+        self.assertEqual(self.d._direcao, Direcoes.Leste.name)
+        self.d.girar(direcao='direita')
+        self.assertEqual(self.d._direcao, Direcoes.Sul.name)
+        self.d.girar(direcao='direita')
+        self.assertEqual(self.d._direcao, Direcoes.Oeste.name)
+        self.d.girar(direcao='direita')
+        self.assertEqual(self.d._direcao, Direcoes.Norte.name)
+        self.d.girar(direcao='esquerda')
+        self.assertEqual(self.d._direcao, Direcoes.Oeste.name)
+        self.d.girar(direcao='esquerda')
+        self.assertEqual(self.d._direcao, Direcoes.Sul.name)
+        self.d.girar(direcao='esquerda')
+        self.assertEqual(self.d._direcao, Direcoes.Leste.name)
+        self.d.girar(direcao='esquerda')
+        self.assertEqual(self.d._direcao, Direcoes.Norte.name)
